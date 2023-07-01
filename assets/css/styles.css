@@ -1,0 +1,594 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Roboto:wght@400;500&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(207, 65%, 65%);
+  --title-color: hsl(207, 4%, 16%);
+  --text-color: hsl(207, 4%, 28%);
+  --text-color-light: hsl(207, 4%, 56%);
+  --body-color: hsl(207, 4%, 99%);
+  --container-color: hsl(207, 4%, 95%);
+
+  /* Change the first number */
+  /* Blue: 207 - Purple: 250 - Pink: 356 - Teal: 174 */
+  --gradient-color: linear-gradient(180deg,
+                      hsla(207, 48%, 72%, 0),
+                      hsla(207, 65%, 65%, 1));
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Roboto', sans-serif;
+  --title-font: 'Lora', serif;
+  --biggest-font-size: 1.5rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+  --tiny-font-size: .625rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/* Responsive typography */
+@media screen and (min-width: 1024px) {
+  :root {
+    --biggest-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+    --tiny-font-size: .688rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background .4s; /* for dark mode animation */
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-family: var(--title-font);
+  font-weight: var(--font-medium);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== THEME ===============*/
+
+
+/*========== Variables Dark theme ==========*/
+body.dark-theme {
+  --title-color: hsl(207, 4%, 95%);
+  --text-color: hsl(207, 4%, 65%);
+  --body-color: hsl(207, 4%, 10%);
+  --container-color: hsl(207, 4%, 12%);
+}
+
+/*========== 
+    Color changes in some parts of 
+    the website, in light theme
+==========*/
+
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1024px;
+  padding-inline: 1.5rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 2.5rem;
+}
+
+.section__border {
+  border-bottom: 1px solid var(--title-color);
+  padding-bottom: 3.5rem;
+}
+
+.section__title, 
+.section__subtitle {
+  text-align: center;
+}
+
+.section__title {
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: .25rem;
+}
+
+.section__subtitle {
+  display: block;
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  margin-bottom: 3rem;
+}
+
+.main {
+  overflow: hidden; /* For animation */
+}
+
+/*=============== HEADER & NAV ===============*/
+
+.header{
+  position: fixed;
+  right: 0;
+  left: 0;
+  bottom: 1em;
+  margin: auto;
+  width: 90%;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: #fff;
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+  gap: 1em;
+}
+
+.nav__logo{
+  color: var(--title-color);
+  font-family: var(--title-font);
+  font-weight: var(--font-semi-bold);
+}
+
+.menu{
+  width: 90%;
+  padding: 2em 1em 5em;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  bottom: -1000%;
+  row-gap: 2em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: bottom 1s;
+  background-color: #fff;
+}
+
+.show-menu{
+  bottom: 5em;
+}
+
+.menu__element{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 0 30%;
+}
+
+.menu__element i{
+  font-size: 1.5em;
+}
+
+.menu__close{
+  position: absolute;
+  bottom: 1em;
+  right: 1.5em;
+  font-size: 1.5em;
+}
+
+.nav__icons{
+  display: flex;
+  gap: 1em;
+  font-size: 1.5em;
+  color: var(--title-color);
+}
+
+.main{
+  margin-top: 6em;
+}
+
+.title{
+  text-align: center;
+  font-size: var(--biggest-font-size);
+}
+
+
+/* Show menu */
+
+
+/* Active link */
+
+
+/*=============== HOME ===============*/
+.home{
+  justify-content: center;
+  align-items: center;
+}
+
+.home__image-container{
+  order: 1;
+}
+
+.home__image{
+  position: relative;
+  width: 150px;
+  margin: 0 auto;
+  border: 2px solid var(--text-color);
+  border-radius: 90px;
+  padding: 1em;
+}
+
+.home__image-img{
+  background: var(--gradient-color);
+  border-radius: 90px;
+  padding: 1em;
+}
+
+.home__image-shape{
+  opacity: .3;
+  position: absolute;
+  right: -1em;
+  bottom: -3em;
+  width: 110px;
+}
+
+.home__social{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.5em;
+  color: var(--title-color);
+  margin-top: 1em;
+}
+
+.home__grid-title{
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: var(--smaller-font-size);
+  margin-block: 2em;
+}
+
+.home__grid-text{
+  color: var(--title-color);
+  line-height: 1.5;
+}
+
+.home__experience{
+  order: 2;
+}
+
+.home__grid-experience{
+  font-size: var(--h1-font-size);
+}
+
+/*=============== SKILLS ===============*/
+.subtitle{
+  text-align: center;
+  color: var(--text-color-light);
+}
+
+.skills-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  gap: 1em;
+  align-items: center;
+}
+
+.skills__title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  flex: 0 0 100%;
+  font-size: var(--title-font);
+  letter-spacing: 2px;
+  color: var(--title-color);
+}
+
+.skills{
+  flex: 0 0 28%;
+  text-align: center;
+}
+
+.skills__element{
+  margin-block: 2em;
+}
+
+.skills__element-img{
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  width: 75px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.skills__element-title{
+  margin-top: 1em;
+  color: var(--title-color);
+  letter-spacing: 2px;
+}
+/* Animation skills */
+
+
+/*=============== QUALIFICATION ===============*/
+
+.qualification-container{
+  margin-top: 4em;
+}
+
+.qualification__title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  color: var(--title-color);
+  margin-bottom: 2em;
+}
+
+.qualification{
+  width: 90%;
+  margin: 2em auto;
+}
+
+.qualification__item-title{
+  letter-spacing: 2px;
+  margin-block: 1em;
+}
+
+.qualification__item-text{
+  color: var(--text-color);
+  margin-bottom: 1em;
+}
+
+/*=============== SERVICES ===============*/
+.services-container{
+  width: 90%;
+  margin: 0 auto;
+  grid-template-columns: 260px;
+  justify-content: center;
+}
+
+.services{
+  background-color: #f0f0f0;
+  padding: 2em;
+  border-radius: 50px;
+  text-align: center;
+  margin-block: 2em;
+}
+
+.services i{
+  font-size: 2em;
+}
+
+.services__title{
+  margin-block: 1em 2em;
+}
+
+/*=============== PROJECTS ===============*/
+.projects-container{
+  grid-template-columns: 260px;
+  justify-content: center;
+  width: 90%;
+  margin: 4em auto;
+}
+
+.projects__img{
+  border-radius: 20px;
+}
+
+.projects__subtitle{
+  margin-top: 1em;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+}
+
+.projects__title{
+  margin-block: 1em;
+}
+
+.projects__view{
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  cursor: pointer;
+}
+
+.testimonial{
+  text-align: center;
+  color: var(--text-color-light);
+}
+
+.testimonial__test{
+  margin: 4em auto;
+  width: 50%;
+  color: var(--title-color);
+}
+
+.testimonial__title{
+  color: var(--title-color);
+  margin-bottom: .5em;
+}
+
+.form__contact{
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.form__contact-input{
+  padding: 1em;
+  border: 2px solid var(--title-color);
+  outline: none;
+  border-radius: 20px;
+  margin-block: 1em;  
+}
+
+.form__contact-submit{
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  font-size: var(--h1-font-size);
+  cursor: pointer;
+}
+
+/* Swiper class */
+
+
+/*=============== TESTIMONIAL ===============*/
+
+
+/* Swiper class */
+
+
+/*=============== CONTACT ===============*/
+
+
+/* Status color */
+
+
+/*=============== FOOTER ===============*/
+.footer{
+  text-align: center;
+  padding-block: 3em 1em;
+  border-top: 1px solid #000;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.home__social--small{
+  font-size: 1em;
+}
+
+.footer__copy{
+  margin-top: 2em;
+}
+
+/*=============== SCROLL BAR ===============*/
+
+
+/*=============== SCROLL UP ===============*/
+
+
+/* Show Scroll Up*/
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media(min-width: 768px){
+  .header{
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+    bottom: unset;
+  }
+
+  .menu{
+    position: initial;
+    width: unset;
+    justify-content: flex-end;
+    box-shadow: unset;
+    gap: 2em;
+    padding: 0;
+    flex: 1;
+  }
+
+  .menu__element{
+    display: block;
+    flex: unset;
+  }
+
+  .menu__element i{
+    display: none;
+  }
+
+  .menu__close{
+    display: none;
+  }
+
+  .ri-menu-4-line{
+    display: none;
+  }
+
+  .home{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4em;
+  }
+
+  .home__image{
+    width: 100%;
+  }
+
+  .skill,
+  .qualification-container,
+  .projects-container,
+  .contact{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .qualification{
+    width: 50%;
+  }
+
+  .services-container{
+    grid-template-columns: repeat(3, 300px);
+  }
+
+  .projects__img{
+    width: 80%;
+  }
+
+  .qualification--70{
+    width: 70%;
+  }
+}
+/* For medium devices */
+
+
+/* For large devices */
