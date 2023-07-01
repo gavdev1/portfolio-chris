@@ -1,6 +1,6 @@
 # Portfolio Chris
 
-Portfolio de chirs elaborado con HTML & CSS con diseño responsive
+Portfolio de chris elaborado con HTML & CSS con diseño responsive
 
 ---
 
